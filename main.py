@@ -7,12 +7,11 @@ from typing import List, Dict, Optional
 from pydantic import BaseModel, Field, field_validator
 from fastapi import FastAPI, HTTPException, status
 from fastapi.middleware.cors import CORSMiddleware
-import uvicorn
 
 app = FastAPI(
     title="Politico Kenya Engine",
-    description="Transparent mandate ledger platform for Kenyan Citizens and Political Candidates.",
-    version="2.0.0"
+    description="Transparent mandate ledger platform for Kenyan Citizens and Political Candidates with full IEBC structural alignment.",
+    version="2.1.0"
 )
 
 # Enable CORS for frontend connectivity
@@ -36,8 +35,8 @@ voted_hashes_registry: set = set()
 # --- PYDANTIC VALIDATION SCHEMAS ---
 
 class ManifestoPillar(BaseModel):
-    title: str = Field(..., min_length=3, max_length=100, example="Maisha Bora / Healthcare")
-    description: str = Field(..., min_length=10, max_length=1000, example="Universal health coverage across all 47 counties.")
+    title: str = Field(..., min_length=3, max_length=100, example="BETA Plan / Uchumi Bora")
+    description: str = Field(..., min_length=10, max_length=1000, example="Structural framework detailing economic intervention parameters.")
 
 class Manifesto(BaseModel):
     version: str = Field(..., example="v1.0")
@@ -45,11 +44,11 @@ class Manifesto(BaseModel):
     pillars: List[ManifestoPillar]
 
 class PoliticianRegisterRequest(BaseModel):
-    full_name: str = Field(..., min_length=3, max_length=100, example="Hon. John Kamau")
-    running_office: str = Field(..., example="Governor")
-    county: str = Field(..., example="Nairobi")
-    constituency: Optional[str] = Field(None, example="Westlands")
-    party_affiliation: str = Field(..., example="Independent")
+    full_name: str = Field(..., min_length=3, max_length=100, example="Hon. William Samoei Ruto")
+    running_office: str = Field(..., example="President")
+    county: str = Field(..., example="Kenya")
+    constituency: Optional[str] = Field(None, example="Westlands — Parklands Ward")
+    party_affiliation: str = Field(..., example="UDA")
     manifesto: Manifesto
 
     @field_validator('running_office')
@@ -111,13 +110,14 @@ def register_candidate(payload: PoliticianRegisterRequest):
     """Registers a candidate into the political index, attaching their local validation parameters."""
     candidate_id = uuid.uuid4()
     
+    # Process inputs clean without shifting structured cascading strings
     politician_data = {
         "candidate_id": candidate_id,
-        "full_name": payload.full_name,
+        "full_name": payload.full_name.strip(),
         "running_office": payload.running_office,
-        "county": payload.county.strip().title(),
-        "constituency": payload.constituency.strip().title() if payload.constituency else None,
-        "party_affiliation": payload.party_affiliation,
+        "county": payload.county.strip(),
+        "constituency": payload.constituency.strip() if payload.constituency else None,
+        "party_affiliation": payload.party_affiliation.strip().upper(),
         "is_verified": True,
         "manifesto": payload.manifesto.model_dump()
     }
@@ -139,10 +139,9 @@ def cast_citizen_mandate(payload: MandateRequest):
     if cand_str not in politicians_ledger:
         raise HTTPException(status_code=404, detail="Candidate ID target match failed to surface on the registry.")
         
-    # Generate verification fingerprint token boundary
     voter_hash = generate_secure_voter_hash(payload.national_id_or_passport, payload.election_year)
     
-    # Sybil / Double vote verification interception block
+    # Anti-Fraud Interception Block
     if voter_hash in voted_hashes_registry:
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN,
@@ -190,7 +189,3 @@ def fetch_transparency_dashboard():
         "total_ballots_tracked": len(mandates_ledger),
         "audit_data": leaderboard
     }
-
-
-if __name__ == "__main__":
-    uvicorn.run(app, host="0.0.0.0", port=8000)
