@@ -1,0 +1,12 @@
+# Ignore python runtime dependency packages
+venv/
+.venv/
+env/
+
+# Ignore memory parsing file configurations
+__pycache__/
+*.pyc
+.DS_Store
+
+# Ignore local secret files
+.env
