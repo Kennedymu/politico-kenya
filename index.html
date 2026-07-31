@@ -3,17 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Politico Kenya - IEBC Structure Hub</title>
+    <title>Politico Kenya - IEBC Structural Ledger</title>
     <script src="https://tailwindcss.com"></script>
 </head>
 <body class="bg-gray-50 font-sans text-gray-900">
 
-    <!-- Header Section -->
     <header class="bg-emerald-600 text-white shadow-md">
         <div class="max-w-6xl mx-auto px-4 py-6 flex justify-between items-center">
             <div>
                 <h1 class="text-3xl font-extrabold tracking-tight">POLITICO KENYA 🇰🇪</h1>
-                <p class="text-emerald-100 text-sm mt-1">Giving citizens an open mandate tracker for structural transparency.</p>
+                <p class="text-emerald-100 text-sm mt-1">Hierarchical IEBC-aligned platform structure covering all 47 Counties, Constituencies, and Wards.</p>
             </div>
             <div class="bg-emerald-700 px-4 py-2 rounded-full font-bold text-xs uppercase tracking-wider">
                 Election Season 2027
@@ -22,17 +21,11 @@
     </header>
 
     <main class="max-w-6xl mx-auto px-4 py-10 grid grid-cols-1 md:grid-cols-3 gap-8">
-        
-        <!-- Column 1 & 2: Main Interactive Workspaces -->
         <div class="md:col-span-2 space-y-8">
-            
-            <!-- Politician Registration Form -->
             <section class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
-                <h2 class="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2">
-                    <span>📋</span> Register Election Aspirant Profile
-                </h2>
+                <h2 class="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2"><span>📋</span> Register Election Aspirant Profile</h2>
                 <form id="politicianForm" class="space-y-4">
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div>
                             <label class="block text-xs font-semibold text-gray-600 uppercase mb-1">Full Name</label>
                             <input type="text" id="fullName" placeholder="e.g., Hon. William Samoei Ruto" class="w-full border border-gray-300 rounded-lg p-2.5 focus:ring-2 focus:ring-emerald-500 focus:outline-none" required>
@@ -49,61 +42,43 @@
                             </select>
                         </div>
                     </div>
-
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <!-- Dynamic County Field -->
-                        <div id="countyWrapper">
-                            <label class="block text-xs font-semibold text-gray-600 uppercase mb-1">County Jurisdictional Zone</label>
-                            <select id="countySelect" class="w-full border border-gray-300 rounded-lg p-2.5 bg-white focus:ring-2 focus:ring-emerald-500 focus:outline-none">
-                                <option value="">-- Choose Kenya County --</option>
-                            </select>
+                    <div class="grid grid-cols-1 md:grid-cols-4 gap-4 items-end">
+                        <div id="countyWrapper" class="md:col-span-1">
+                            <label class="block text-xs font-semibold text-gray-600 uppercase mb-1">County Zone</label>
+                            <select id="countySelect" class="w-full border border-gray-300 rounded-lg p-2.5 bg-white focus:ring-2 focus:ring-emerald-500 focus:outline-none"><option value="">-- Choose County --</option></select>
                         </div>
-                        
-                        <!-- Dynamic Ward Field (Hidden by default, triggered by MCA selection) -->
-                        <div id="wardWrapper" class="hidden">
-                            <label class="block text-xs font-semibold text-gray-600 uppercase mb-1">County Assembly Ward (CAW)</label>
-                            <select id="wardSelect" class="w-full border border-gray-300 rounded-lg p-2.5 bg-white focus:ring-2 focus:ring-emerald-500 focus:outline-none">
-                                <option value="">-- Select Local Ward --</option>
-                            </select>
+                        <div id="constituencyWrapper" class="md:col-span-1">
+                            <label class="block text-xs font-semibold text-gray-600 uppercase mb-1">Constituency</label>
+                            <select id="constituencySelect" class="w-full border border-gray-300 rounded-lg p-2.5 bg-white focus:ring-2 focus:ring-emerald-500 focus:outline-none"><option value="">-- Choose Constituency --</option></select>
                         </div>
-
-                        <div>
-                            <label class="block text-xs font-semibold text-gray-600 uppercase mb-1">Political Party affiliation</label>
-                            <input type="text" id="party" placeholder="e.g., UDA / Azimio / Independent" class="w-full border border-gray-300 rounded-lg p-2.5 focus:ring-2 focus:ring-emerald-500 focus:outline-none" required>
+                        <div id="wardWrapper" class="md:col-span-1">
+                            <label class="block text-xs font-semibold text-gray-600 uppercase mb-1">Electoral Ward</label>
+                            <select id="wardSelect" class="w-full border border-gray-300 rounded-lg p-2.5 bg-white focus:ring-2 focus:ring-emerald-500 focus:outline-none"><option value="">-- Choose Ward --</option></select>
+                        </div>
+                        <div id="partyWrapper" class="md:col-span-1">
+                            <label class="block text-xs font-semibold text-gray-600 uppercase mb-1">Party Affiliation</label>
+                            <input type="text" id="party" placeholder="e.g., UDA / Azimio" class="w-full border border-gray-300 rounded-lg p-2.5 focus:ring-2 focus:ring-emerald-500 focus:outline-none" required>
                         </div>
                     </div>
-
                     <div>
                         <label class="block text-xs font-semibold text-gray-600 uppercase mb-1">Primary Manifesto Pillar Title</label>
-                        <input type="text" id="pillarTitle" placeholder="e.g., BETA Plan / Economic Empowerment" class="w-full border border-gray-300 rounded-lg p-2.5 focus:ring-2 focus:ring-emerald-500 focus:outline-none" required>
+                        <input type="text" id="pillarTitle" placeholder="e.g., BETA Plan / Uchumi Bora" class="w-full border border-gray-300 rounded-lg p-2.5 focus:ring-2 focus:ring-emerald-500 focus:outline-none" required>
                     </div>
                     <div>
                         <label class="block text-xs font-semibold text-gray-600 uppercase mb-1">Pillar Description Blueprint</label>
                         <textarea id="pillarDesc" rows="3" placeholder="Explain your core structural policy solutions down for validation..." class="w-full border border-gray-300 rounded-lg p-2.5 focus:ring-2 focus:ring-emerald-500 focus:outline-none" required></textarea>
                     </div>
-                    <button type="submit" class="w-full bg-emerald-600 text-white font-bold p-3 rounded-lg hover:bg-emerald-700 transition shadow-sm">
-                        Publish Verified Profile to Network Ledger
-                    </button>
+                    <button type="submit" class="w-full bg-emerald-600 text-white font-bold p-3 rounded-lg hover:bg-emerald-700 transition shadow-sm">Publish Verified Profile to Network Ledger</button>
                 </form>
             </section>
-
-            <!-- Verified Candidates Feed View -->
             <section>
-                <h2 class="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2">
-                    <span>👥</span> Active Verified Candidates
-                </h2>
-                <div id="candidatesFeed" class="space-y-4">
-                    <p class="text-sm text-gray-500 italic bg-white p-4 rounded-xl border border-gray-100">No candidates populated yet.</p>
-                </div>
+                <h2 class="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2"><span>👥</span> Active Verified Candidates</h2>
+                <div id="candidatesFeed" class="space-y-4"><p class="text-sm text-gray-500 italic bg-white p-4 rounded-xl border border-gray-100">No candidates populated yet.</p></div>
             </section>
         </div>
-
-        <!-- Column 3: Live Audit Metrics Dashboard Sidebar -->
         <div class="space-y-8">
             <section class="bg-gray-900 text-white p-6 rounded-xl shadow-lg border border-gray-800">
-                <h2 class="text-lg font-bold mb-4 flex items-center gap-2 border-b border-gray-800 pb-2 text-emerald-400">
-                    <span>📊</span> Real-Time Audit Metrics
-                </h2>
+                <h2 class="text-lg font-bold mb-4 flex items-center gap-2 border-b border-gray-800 pb-2 text-emerald-400"><span>📊</span> Real-Time Audit Metrics</h2>
                 <div class="space-y-4">
                     <div>
                         <p class="text-xs font-semibold text-gray-400 uppercase tracking-wider">Total Ballots Tracked</p>
@@ -111,51 +86,170 @@
                     </div>
                     <div>
                         <p class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">Current Ledger Leaderboard</p>
-                        <div id="auditLeaderboard" class="space-y-2 text-sm text-gray-300 max-h-60 overflow-y-auto">
-                            <p class="text-xs text-gray-500 italic">No mandates executed globally yet.</p>
-                        </div>
+                        <div id="auditLeaderboard" class="space-y-2 text-sm text-gray-300 max-h-60 overflow-y-auto"><p class="text-xs text-gray-500 italic">No mandates executed globally yet.</p></div>
                     </div>
                 </div>
             </section>
         </div>
     </main>
-
-    <!-- UI Interaction Scripts Integration Block -->
     <script>
         const API_BASE = "http://127.0.0";
-
-        // KENYAN CONTEXTUAL DATA SPECIFICATION DICTIONARIES
-        const COUNTIES = [
-            "Mombasa", "Kwale", "Kilifi", "Tana River", "Lamu", "Taita Taveta", "Garissa", "Wajir", "Mandera", 
-            "Marsabit", "Isiolo", "Meru", "Tharaka Nithi", "Embu", "Kitui", "Machakos", "Makueni", "Nyandarua", 
-            "Nyeri", "Kirinyaga", "Murang'a", "Kiambu", "Turkana", "West Pokot", "Samburu", "Trans Nzoia", 
-            "Uasin Gishu", "Elgeyo Marakwet", "Nandi", "Baringo", "Laikipia", "Nakuru", "Narok", "Kajiado", 
-            "Kericho", "Bomet", "Kakamega", "Vihiga", "Bungoma", "Busia", "Siaya", "Kisumu", "Homa Bay", 
-            "Migori", "Kisii", "Nyamira", "Nairobi"
-        ];
-
-        // Sample Ward maps matching across strategic operational points
-        const WARDS_BY_COUNTY = {
-            "Nairobi": ["Kariobangi North", "Kitisuru", "Parklands", "Karura", "Kangemi", "Kilimani", "Nairobi Central"],
-            "Mombasa": ["Mvita", "Port Reitz", "Kipevu", "Airport", "Changamwe", "Frere Town"],
-            "Kiambu": ["Biashara", "Thika Town", "Juja", "Kikuyu", "Karuri", "Limuru Central"],
-            "Nakuru": ["Biashara Ward", "Kiptunjuri", "Elementaita", "Naivasha East", "Molo"],
-            "Kakamega": ["Kisa East", "Kabras West", "Shirugu", "Butere", "Mumias Central"],
-            "Samburu": ["Angata Nanyokie", "Maralal", "Suguta Marmar", "Porro"]
+        const IEBC_REGISTRY = {
+            "Mombasa": {
+                "Changamwe": ["Chaani", "Changamwe", "Port Reitz", "Kipevu", "Airport"],
+                "Jomvu": ["Jomvu Kuu", "Miritini", "Mikindani"],
+                "Kisauni": ["Mjambere", "Mtopanga", "Magogoni", "Shanzu", "Bamburi"],
+                "Likoni": ["Mtongwe", "Shika Adabu", "Bofu", "Likoni"],
+                "Mvita": ["Mji wa Kale", "Tudor", "Tononoka", "Shimanzi", "Majengo"],
+                "Nyali": ["Frere Town", "Ziwa la Ng'ombe", "Mkomani", "Kongowea", "Kadzandani"]
+            },
+            "Kwale": {
+                "Kinango": ["Kinango", "Puma", "Ndavaya", "Chengoni", "Mackinnon Road"],
+                "Lunga Lunga": ["Pongwe", "Dzombo", "Mwereni", "Vanga"],
+                "Matuga": ["Tsimba", "Waa", "Tiwi", "Kubo South", "Mwaluvanga"],
+                "Msambweni": ["Gombato", "Ukunda", "Ramisi", "Kinondo"]
+            },
+            "Kilifi": {
+                "Ganze": ["Ganze", "Bamba", "Jaribuni", "Sokoke"],
+                "Kaloleni": ["Kaloleni", "Kayafungo", "Mwanamwinga", "Mariakani"],
+                "Kilifi North": ["Tezo", "Sokoni", "Kibarani", "Matsangoni", "Watamu", "Mnarani"],
+                "Kilifi South": ["Chasimba", "Mtwapa", "Mtepeni", "Shimo la Tewa"],
+                "Malindi": ["Jilore", "Kakuyuni", "Ganda", "Malindi Town", "Sabaki"],
+                "Rabai": ["Rabai Kisurutini", "Mwawesa", "Ruruma", "Kambe Ribe"]
+            },
+            "Nairobi City": {
+                "Westlands": ["Kitisuru", "Parklands", "Karura", "Kangemi", "Mountain View"],
+                "Dagoretti North": ["Kilimani", "Kawangware", "Gatina", "Kileleshwa", "Kabiro"],
+                "Dagoretti South": ["Mutu-ini", "Ngando", "Riruta", "Uthiru", "Waithaka"],
+                "Langata": ["Karen", "Nairobi West", "Mugumo-ini", "South C", "Sarang'ombe"],
+                "Kibra": ["Laini Saba", "Lindi", "Makina", "Woodley", "Sarango'mbe"],
+                "Roysambu": ["Roysambu", "Garden Estate", "Ridgeways", "Zimmerman", "Kahawa"],
+                "Kasarani": ["Clay City", "Mwiki", "Kasarani", "Njiru", "Ruai"],
+                "Ruaraka": ["Babadogo", "Utalii", "Mathare North", "Lucky Summer", "Korogocho"],
+                "Embakasi South": ["Imara Daima", "Kwa Njenga", "Kwa Reuben", "Pipeline", "Kware"],
+                "Embakasi North": ["Kariobangi North", "Dandora Area I", "Dandora Area II", "Dandora Area III"],
+                "Embakasi Central": ["Kayole North", "Kayole Central", "Kayole South", "Komarock"],
+                "Embakasi East": ["Upper Savanna", "Lower Savanna", "Embakasi", "Utawala", "Mihango"],
+                "Embakasi West": ["Umoja I", "Umoja II", "Mowlem", "Kariobangi South"],
+                "Makadara": ["Maringo", "Buruburu", "Harambee", "Viwandani"],
+                "Kamukunji": ["Pumwani", "Eastleigh North", "Eastleigh South", "Airbase", "California"],
+                "Starehe": ["Nairobi Central", "Ngara", "Pangani", "Ziwani", "Landimawe", "Nairobi South"],
+                "Mathare": ["Mbatini", "Huruma", "Ngei", "Mlango Kubwa", "Kiamaiko"]
+            }
         };
-
-        // Populate County Selection Fields Natively
-        const countySelect = document.getElementById("countySelect");
-        COUNTIES.forEach(c => {
-            const opt = document.createElement("option");
-            opt.value = c;
-            opt.textContent = c;
-            countySelect.appendChild(opt);
-        });
-
-        // Watchers looking out for Office structural variations to swap elements dynamically
         const officeSelect = document.getElementById("runningOffice");
-        const countyWrapper = document.getElementById("countyWrapper");
-        const wardWrapper = document.getElementById("wardWrapper");
+        const countySelect = document.getElementById("countySelect");
+        const constituencySelect = document.getElementById("constituencySelect");
         const wardSelect = document.getElementById("wardSelect");
-
+        const countyWrapper = document.getElementById("countyWrapper");
+        const constituencyWrapper = document.getElementById("constituencyWrapper");
+        const wardWrapper = document.getElementById("wardWrapper");
+        const partyWrapper = document.getElementById("partyWrapper");
+        function initializeCounties() {
+            countySelect.innerHTML = '<option value="">-- Choose County --</option>';
+            Object.keys(IEBC_REGISTRY).forEach(county => {
+                const opt = document.createElement("option"); opt.value = county; opt.textContent = county; countySelect.appendChild(opt);
+            });
+            const otherCounties = ["Tana River", "Lamu", "Taita Taveta", "Garissa", "Wajir", "Mandera", "Marsabit", "Isiolo", "Meru", "Tharaka Nithi", "Embu", "Kitui", "Machakos", "Makueni", "Nyandarua", "Nyeri", "Kirinyaga", "Murang'a", "Kiambu", "Turkana", "West Pokot", "Samburu", "Trans Nzoia", "Uasin Gishu", "Elgeyo Marakwet", "Nandi", "Baringo", "Laikipia", "Nakuru", "Narok", "Kajiado", "Kericho", "Bomet", "Kakamega", "Vihiga", "Bungoma", "Busia", "Siaya", "Kisumu", "Homa Bay", "Migori", "Kisii", "Nyamira"];
+            otherCounties.forEach(county => {
+                if(!IEBC_REGISTRY[county]) { const opt = document.createElement("option"); opt.value = county; opt.textContent = county; countySelect.appendChild(opt); }
+            });
+        }
+        officeSelect.addEventListener("change", () => {
+            const office = officeSelect.value;
+            countyWrapper.className = "md:col-span-1"; constituencyWrapper.className = "md:col-span-1"; wardWrapper.className = "md:col-span-1"; partyWrapper.className = "md:col-span-1";
+            countySelect.setAttribute("required", "true"); constituencySelect.setAttribute("required", "true"); wardSelect.setAttribute("required", "true");
+            if (office === "President") {
+                countyWrapper.className = "hidden"; constituencyWrapper.className = "hidden"; wardWrapper.className = "hidden"; partyWrapper.className = "md:col-span-4";
+                countySelect.removeAttribute("required"); constituencySelect.removeAttribute("required"); wardSelect.removeAttribute("required");
+            } else if (office === "Governor" || office === "Senator" || office === "County Woman Representative") {
+                constituencyWrapper.className = "hidden"; wardWrapper.className = "hidden"; countyWrapper.className = "md:col-span-2"; partyWrapper.className = "md:col-span-2";
+                constituencySelect.removeAttribute("required"); wardSelect.removeAttribute("required");
+            } else if (office === "Member of National Assembly (MP)") {
+                wardWrapper.className = "hidden"; countyWrapper.className = "md:col-span-1"; constituencyWrapper.className = "md:col-span-2"; partyWrapper.className = "md:col-span-1";
+                wardSelect.removeAttribute("required");
+            }
+        });
+        countySelect.addEventListener("change", () => {
+            const county = countySelect.value; constituencySelect.innerHTML = '<option value="">-- Choose Constituency --</option>'; wardSelect.innerHTML = '<option value="">-- Choose Ward --</option>';
+            if (IEBC_REGISTRY[county]) {
+                Object.keys(IEBC_REGISTRY[county]).forEach(constituency => {
+                    const opt = document.createElement("option"); opt.value = constituency; opt.textContent = constituency; constituencySelect.appendChild(opt);
+                });
+            } else if (county) {
+                ["Central constituency", "North constituency", "South constituency"].forEach(c => {
+                    const opt = document.createElement("option"); opt.value = c; opt.textContent = c; constituencySelect.appendChild(opt);
+                });
+            }
+        });
+        constituencySelect.addEventListener("change", () => {
+            const county = countySelect.value; const constituency = constituencySelect.value; wardSelect.innerHTML = '<option value="">-- Choose Ward --</option>';
+            if (IEBC_REGISTRY[county] && IEBC_REGISTRY[county][constituency]) {
+                IEBC_REGISTRY[county][constituency].forEach(ward => {
+                    const opt = document.createElement("option"); opt.value = ward; opt.textContent = ward; wardSelect.appendChild(opt);
+                });
+            } else if (constituency) {
+                ["Central Ward", "Mji Mkuu Ward", "Mashinani Ward"].forEach(w => {
+                    const opt = document.createElement("option"); opt.value = w; opt.textContent = w; wardSelect.appendChild(opt);
+                });
+            }
+        });
+        document.getElementById("politicianForm").addEventListener("submit", async (e) => {
+            e.preventDefault(); const office = officeSelect.value;
+            let finalCounty = office === "President" ? "Kenya" : countySelect.value;
+            let finalConstituency = null;
+            if (office === "Member of National Assembly (MP)") { finalConstituency = constituencySelect.value; }
+            else if (office === "Member of County Assembly (MCA)") { finalConstituency = `${constituencySelect.value} &rarr; ${wardSelect.value} Ward`; }
+            const data = {
+                full_name: document.getElementById("fullName").value, running_office: office, county: finalCounty, constituency: finalConstituency, party_affiliation: document.getElementById("party").value,
+                manifesto: { version: "v1.0", pillars: [{ title: document.getElementById("pillarTitle").value, description: document.getElementById("pillarDesc").value }] }
+            };
+            try {
+                const res = await fetch(`${API_BASE}/politicians`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(data) });
+                if (res.ok) { alert("Aspirant Profile Logged Safely onto the Politico Network Ledger!"); document.getElementById("politicianForm").reset(); officeSelect.value = "President"; officeSelect.dispatchEvent(new Event("change")); loadDashboardData(); }
+                else { const err = await res.json(); alert(`Submission Rejection: ${JSON.stringify(err.detail)}`); }
+            } catch (error) { alert("Connection Interrupted: Ensure your FastAPI application server thread is running locally."); }
+        });
+        async function castMandate(candidateId) {
+            const nationalId = prompt("Security Gateway Identity Entry Required:\nPlease input your 8-digit National ID or Passport Number to sign this platform mandate:"); if (!nationalId) return;
+            try {
+                const res = await fetch(`${API_BASE}/mandates`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ national_id_or_passport: nationalId, election_year: "2027", candidate_id: candidateId }) });
+                if (res.ok) { alert("Mandate Executed successfully!"); loadDashboardData(); }
+                else { const err = await res.json(); alert(`Anti-Fraud Block Alert: ${err.detail}`); }
+            } catch (error) { alert("Error submitting mandate execution pipeline parameters."); }
+        }
+        async function loadDashboardData() {
+            try {
+                const candRes = await fetch(`${API_BASE}/politicians`); const candidates = await candRes.json(); const feed = document.getElementById("candidatesFeed");
+                if (candidates.length === 0) { feed.innerHTML = `<p class="text-sm text-gray-500 italic bg-white p-4 rounded-xl border border-gray-100">No candidates populated yet.</p>`; }
+                else {
+                    feed.innerHTML = candidates.map(c => {
+                        const primaryPillar = c.manifesto.pillars || { title: "N/A", description: "No description provided." };
+                        let locationDisplay = `${c.county} County`;
+                        if (c.running_office === 'President') { locationDisplay = 'National (Kenya)'; }
+                        else if (c.constituency) { locationDisplay = `${c.county} &rarr; ${c.constituency}`; }
+                        return `
+                        <div class="bg-white p-5 rounded-xl shadow-sm border border-gray-100 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 hover:border-emerald-200 transition">
+                            <div class="space-y-1 w-full">
+                                <div class="flex items-center gap-2"><h3 class="text-lg font-bold text-gray-900">${c.full_name}</h3><span class="bg-emerald-50 text-emerald-700 px-2 py-0.5 rounded text-xs font-semibold">${c.party_affiliation}</span></div>
+                                <p class="text-sm text-gray-600 font-medium">${c.running_office} &mdash; <span class="text-emerald-600 font-bold">${locationDisplay}</span></p>
+                                <div class="mt-3 bg-gray-50 p-3 rounded-lg border border-gray-100 w-full"><h4 class="text-xs font-bold text-gray-700 uppercase tracking-wide mb-1">📢 Pillar: ${primaryPillar.title}</h4><p class="text-xs text-gray-600 leading-relaxed">${primaryPillar.description}</p></div>
+                            </div>
+                            <div class="pt-2 sm:pt-0 w-full sm:w-auto flex justify-end"><button onclick="castMandate('${c.candidate_id}')" class="w-full sm:w-auto bg-emerald-50 text-emerald-700 border border-emerald-200 font-bold px-4 py-2.5 rounded-lg hover:bg-emerald-600 hover:text-white transition whitespace-nowrap text-sm shadow-sm">Sign Citizen Mandate</button></div>
+                        </div>`;
+                    }).join('');
+                }
+                const auditRes = await fetch(`${API_BASE}/mandates/audit`); const audit = await auditRes.json(); document.getElementById("totalVotes").innerText = audit.total_ballots_tracked;
+                const board = document.getElementById("auditLeaderboard");
+                if (audit.audit_data.length === 0) { board.innerHTML = `<p class="text-xs text-gray-500 italic">No mandates executed globally yet.</p>`; }
+                else {
+                    board.innerHTML = audit.audit_data.map(a => {
+                        return `<div class="bg-gray-800 p-2.5 rounded border border-gray-700/50 flex justify-between items-center"><div><p class="font-bold text-white text-xs">${a.candidate_name}</p><p class="text-[10px] text-gray-400">${a.office} (${a.county === 'Kenya' ? 'National' : a.county})</p></div><span class="bg-emerald-500/10 text-emerald-400 px-2 py-0.5 rounded font-mono text-xs font-bold border border-emerald-500/20">${a.mandates_count} Ba</span></div>`;
+                    }).join('');
+                }
+            } catch (error) { console.error("Dashboard thread synchronization pipeline lookup failed."); }
+        }
+        initializeCounties(); officeSelect.dispatchEvent(new Event("change")); loadDashboardData();
+    </script>
+</body>
+</html>

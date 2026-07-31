@@ -3,6 +3,7 @@ import bcrypt
 
 from backend.database import get_connection
 from backend.schemas.user import UserRegistration, UserLogin
+from backend.utils.security import create_access_token
 
 router = APIRouter(tags=["Authentication"])
 
@@ -39,6 +40,7 @@ def register(user: UserRegistration):
             detail="Email already registered."
         )
 
+    # Hash password
     password_hash = bcrypt.hashpw(
         user.password.encode("utf-8"),
         bcrypt.gensalt()
@@ -81,6 +83,7 @@ def register(user: UserRegistration):
         "user_id": user_id
     }
 
+
 @router.post("/login")
 def login(user: UserLogin):
 
@@ -116,8 +119,17 @@ def login(user: UserLogin):
 
     conn.close()
 
+    access_token = create_access_token(
+        {
+            "sub": db_user["national_id"],
+            "user_id": db_user["id"],
+            "role": db_user["role"]
+        }
+    )
+
     return {
-        "message": "Login successful",
+        "access_token": access_token,
+        "token_type": "bearer",
         "user_id": db_user["id"],
         "full_name": db_user["full_name"],
         "role": db_user["role"]
